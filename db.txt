@@ -1,0 +1,36 @@
+//for registration table
+CREATE TABLE IF NOT EXISTS public.registration
+(
+    student_id bigint NOT NULL,
+    course_id bigint NOT NULL,
+    CONSTRAINT registration_pkey PRIMARY KEY (student_id, course_id),
+    CONSTRAINT fk959shb7hcjqa3da6yh0jp88rr FOREIGN KEY (course_id)
+        REFERENCES public.tblcourse (course_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fkgwvhixtplheey881msw7rddp FOREIGN KEY (student_id)
+        REFERENCES public.tblstudent (student_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+//for tblcourse
+CREATE TABLE IF NOT EXISTS public.tblcourse
+(
+    course_id bigint NOT NULL DEFAULT nextval('tblcourse_course_id_seq'::regclass),
+    description character varying(255) COLLATE pg_catalog."default",
+    name character varying(255) COLLATE pg_catalog."default",
+    CONSTRAINT tblcourse_pkey PRIMARY KEY (course_id)
+)
+
+//for tblstudent
+CREATE TABLE IF NOT EXISTS public.tblstudent
+(
+    student_id bigint NOT NULL DEFAULT nextval('tblstudent_student_id_seq'::regclass),
+    bday character varying(255) COLLATE pg_catalog."default",
+    email character varying(255) COLLATE pg_catalog."default",
+    fname character varying(255) COLLATE pg_catalog."default",
+    lname character varying(255) COLLATE pg_catalog."default",
+    level integer,
+    CONSTRAINT tblstudent_pkey PRIMARY KEY (student_id)
+)
